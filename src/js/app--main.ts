@@ -148,7 +148,7 @@ window.addEventListener("load", async () => {
   );
 
   async function loadAudioSelection() {
-    const audioResponse = await fetch("/audio/audio.json");
+    const audioResponse = await fetch("ext/tartan-ify/audio/audio.json");
     return await audioResponse.json();
   }
 });

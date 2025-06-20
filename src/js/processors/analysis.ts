@@ -53,7 +53,7 @@ class MusicAnalyser {
   }
 
   async calculateFftDiffMatrix(ffts: Float32Array[]): Promise<Float32Array> {
-    const task = new TaskPromiseWorker("/js/workers/w--diff-analysis.js");
+    const task = new TaskPromiseWorker("ext/tartan-ify/js/workers/w--diff-analysis.js");
 
     this.#status.update({
       status: "Calculating differences between segments",
@@ -72,7 +72,7 @@ class MusicAnalyser {
     sampleRate: number,
     interval: number
   ): Promise<Float32Array[]> {
-    const task = new TaskPromiseWorker("/js/workers/w--fft.js");
+    const task = new TaskPromiseWorker("ext/tartan-ify/js/workers/w--fft.js");
 
     this.#status.update({
       status: "Analysing spectrum for each segments",
@@ -106,7 +106,7 @@ class MusicAnalyser {
       return storedBpm * bpm.autodetectMultiplier;
     }
 
-    const task = new TaskPromiseWorker("/js/workers/w--tempo.js");
+    const task = new TaskPromiseWorker("ext/tartan-ify/js/workers/w--tempo.js");
 
     this.#status.update({
       status: "Detecting BPM",

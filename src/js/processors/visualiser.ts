@@ -49,7 +49,7 @@ export class DiffVisualiser {
     scale,
     colors,
   }: SingleDiffVisualiserRenderArgs): Promise<Uint8ClampedArray> {
-    const task = new TaskPromiseWorker("/js/workers/w--renderer.js");
+    const task = new TaskPromiseWorker("ext/tartan-ify/js/workers/w--renderer.js");
 
     this.status.update({
       status: "Generating visualisation ",
@@ -71,7 +71,7 @@ export class DiffVisualiser {
     matrixParams,
     colors,
   }: MultiDiffVisualiserRenderArgs): Promise<MultiDiffVisualiserResult[]> {
-    const task = new TaskPromiseWorker("/js/workers/w--renderer.js");
+    const task = new TaskPromiseWorker("ext/tartan-ify/js/workers/w--renderer.js");
 
     this.status.update({
       status: "Generating visualisations",
