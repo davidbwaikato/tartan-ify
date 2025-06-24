@@ -83,13 +83,10 @@ export class SingleVisualisationPainter implements VisView {
           this.canvas.width
         );
 
-
-	//const scaleCanvasToImage = this._image.width / this.canvas.width;
 	const scaleImageToCanvas = this.canvas.width / this._image.width;
 
-	const zoom = 4; // of the canvas size???
+	const zoom = 4; // of the canvas size
 	const scaleCanvasToZoom = zoom;
-	//const scaleImageToZoom  = zoom * scaleImageToCanvas;
 	  
         const canvasPixelSize = this.canvas.width / this._image.width;
 	  
@@ -130,7 +127,6 @@ export class SingleVisualisationPainter implements VisView {
 		const zoomBoxSize = this.canvas.width / 4;
 		const zoomBoxOffset = zoomBoxSize / 2;
 		
-		//const proportionalSize = this._image.width / this.canvas.width / zoom;
 		const proportionalSize = this._image.width / (this.canvas.width * zoom);
 		const proportionalOffset = proportionalSize * zoomBoxOffset;
 		
@@ -293,16 +289,11 @@ export class SingleVisualisationPainter implements VisView {
     bpm,
     colors,
   }: SingleVisualisationStartArgs): Promise<void> {
-    //const image = await convertImage(this.context, imageData);
     this._image = await convertImage(this.context, imageData);
 
     this.wrapper.style.setProperty("--color-similar", colors.similar);
     this.wrapper.style.setProperty("--color-diff", colors.diff);
 
-      // **** can be deleted
-      //const canvas = this.canvas;
-      //const context = this.context;
-      
     this._interval = 1000 / (bpm / 60);
     // The following is only needed if GSDLWavesurfer not defined  
     this._startTime = Date.now(); // **** consider changing this and others to performance.now()
@@ -337,17 +328,6 @@ export class SingleVisualisationPainter implements VisView {
         that.draw();
       });
     });
-
-      /*
-    this.canvas.addEventListener("mousemove", function (evt: MouseEvent) {
-      that._position = {
-        x: evt.clientX - that.canvas.offsetLeft,
-        y: evt.clientY - that.canvas.offsetTop,
-        perc_x: (evt.clientX - that.canvas.offsetLeft) / that.canvas.width,
-        perc_y: (evt.clientY - that.canvas.offsetTop) / that.canvas.height,
-      };
-    });
-*/
 
     this.canvas.addEventListener("mousemove", function (evt: MouseEvent) {
 	const rect = that.canvas.getBoundingClientRect(); // DOMRect relative to viewport
