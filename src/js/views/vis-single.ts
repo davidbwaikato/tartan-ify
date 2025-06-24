@@ -345,5 +345,25 @@ export class SingleVisualisationPainter implements VisView {
       that._position = undefined;
     });
 
+      
+      this.canvas.addEventListener("click", (evt: MouseEvent) => {	  
+	const rect = that.canvas.getBoundingClientRect(); // DOMRect relative to viewport
+	
+	const position = {
+	    x: evt.clientX - rect.left,
+	    y: evt.clientY - rect.top,
+	    perc_x: (evt.clientX - rect.left) / rect.width,
+	    perc_y: (evt.clientY - rect.top) / rect.height,
+	};
+	
+	if (typeof GSDLWavesurfer !== 'undefined') {
+	    GSDLWavesurfer.seekTo(position.perc_x);
+	    if (!GSDLWavesurfer.isPlaying()) {
+		GSDLWavesurfer.play();
+	    }
+	}
+	
+    });
   }
+      
 }
