@@ -151,4 +151,8 @@ window.addEventListener("load", async () => {
     const audioResponse = await fetch("ext/tartan-ify/audio/audio.json");
     return await audioResponse.json();
   }
+
+  (window as any).tartanifySingleVisPainter = singleVisPainter;
 });
+
+

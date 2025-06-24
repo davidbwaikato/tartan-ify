@@ -8,6 +8,8 @@ import { AnalysisStore } from "../stores/analyis";
 import { hashFile } from "./tool--file-hasher";
 import { PageManager } from "../views/page-handler";
 
+declare const GSDLWavesurfer: any; /* GSLD mod */
+
 export class SingleAnalysisHandler {
   constructor(
     private pages: PageManager,
@@ -76,7 +78,12 @@ export class SingleAnalysisHandler {
 
     this.pages.showVisualisation(this.visPainter);
 
-    playAudio(track.audioBuffer);
+    if ((typeof GSDLWavesurfer !== 'undefined') && (GSDLWavesurfer != null)) {
+        GSDLWavesurfer.play();
+    }
+    else {
+        playAudio(track.audioBuffer);
+    }
 
     this.visPainter.start({
       image: new Uint8ClampedArray(await imageData.arrayBuffer()),

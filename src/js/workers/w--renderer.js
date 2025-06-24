@@ -64,6 +64,9 @@ onmessage = function ({
       mapper: mapFuncs[scale],
     });
 
+      console.log("**** Away to call renderer.render(data)");
+      console.log(data);
+
     const render = renderer.render(data);
 
     console.log(`worker--renderer.js - renderSize: ${render.length}`);
@@ -127,7 +130,8 @@ class MusicSimilarityRenderer {
 
       const hE = this.colorSimilar[0];
       const hS = this.colorDiff[0];
-      const hf = circularTween(hE, hS);
+	const hf = circularTween(hE, hS);
+	//const hf = circularTween(hS, hE);
 
       const sE = this.colorSimilar[1];
       const sS = this.colorDiff[1];

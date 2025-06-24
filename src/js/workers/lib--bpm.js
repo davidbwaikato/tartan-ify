@@ -620,6 +620,14 @@ class OnsetDetection {
         stage: "Calculating spectral flux",
         percentage: wndStart / length,
       });
+
+	// **** forced delay loop follows
+	/*
+	let fake_total = 0;
+	for (let iii=0; iii<100000; iii++) {
+	    fake_total = (fake_total + iii) % 100;
+	}
+	*/
       let wndEnd = wndStart + bufferSize;
 
       let re = [];

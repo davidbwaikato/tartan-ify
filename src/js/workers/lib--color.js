@@ -10,13 +10,34 @@ const circularTween = (function () {
     return (r * 180) / Math.PI;
   };
 
-  return function (start, stop) {
-    start = dtor(start * 360);
-    stop = dtor(stop * 360);
-    var delta = Math.atan2(Math.sin(stop - start), Math.cos(stop - start));
-    return function tween(i) {
-      return ((rtod(start + delta * i) + 360) % 360) / 360;
-    };
+    return function (start_perc, stop_perc) {
+
+	const start_deg = start_perc * 360;
+	const stop_deg  = stop_perc * 360;
+	
+	console.log(`workerlib-color.js - start-hue(deg)=${start_deg}, stop-hue(deg)=${stop_deg}`);
+
+	var delta_deg = (stop_deg - start_deg + 360) % 360;
+	console.log(`workerlib-color.js - circularTween delta(deg)=${delta_deg}`);
+	
+	const start_rad = dtor(start_deg);
+	const stop_rad  = dtor(stop_deg);
+      
+	//var delta = Math.atan2(Math.sin(stop - start), Math.cos(stop - start));
+	//var delta = (stop - start + 2 * Math.PI) % (2 * Math.PI);
+	var delta_rad = dtor(delta_deg);
+	      
+      
+	return function tween(i) {
+
+	    // 'i' is a measure of disimilarlty: 0-1.0
+	    
+	    //return ((rtod(start + delta * i) + 360) % 360) / 360;
+	    const circ_delta_deg_i = ((rtod(start_rad + (delta_rad * i)) + 360) % 360);
+	    const circ_delta_perc_i = circ_delta_deg_i / 360;
+	    
+	    return circ_delta_perc_i;
+	};
   };
 })();
 
