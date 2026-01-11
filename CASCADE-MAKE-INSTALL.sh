@@ -3,7 +3,7 @@
 
 npm install
 
-# ./BUILD-BUNDLE.sh
+npm run build
 
 if [ ! -d ../../../web/ext/tartan-ify ] ; then
     mkdir -v ../../../web/ext/tartan-ify
